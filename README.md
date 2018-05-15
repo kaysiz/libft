@@ -2,11 +2,11 @@
 A C library regrouping usual functions allowed in the cole 42 course Y1
 
 # Part 1 Functions
-[memset]()
-[bzero]()
-[memcpy]()
-[memccpy]()
-[memmove]()
+1. [memset]()
+2. [bzero]()
+3. [memcpy]()
+4. [memccpy]()
+5. [memmove]()
 [memchr]()
 [memcmp]()
 [strlen]()
