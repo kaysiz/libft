@@ -5,7 +5,7 @@ A C library regrouping usual functions allowed in the cole 42 course Y1
 [author]()
 
 # Part 1 - Libc functions
-1. [memset]()
+1. [memset](src-1/ft_memset.c)
 2. [bzero]()
 3. [memcpy]()
 4. [memccpy]()
@@ -35,7 +35,7 @@ A C library regrouping usual functions allowed in the cole 42 course Y1
 28. [tolower]()
 
 # Part 2 - Additional functions
-1. [ft_memalloc]()
+1. [ft_memalloc](src-2/ft_memalloc.c)
 2. [ft_memdel]()
 3. [ft_strnew]()
 4. [ft_strdel]()
