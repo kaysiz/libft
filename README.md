@@ -32,7 +32,7 @@ A C library regrouping usual functions allowed in the cole 42 course Y1
 25. [isascii]()
 26. [isprint]()
 27. [toupper](src-1/ft_toupper.c)
-28. [tolower](src-1/ft_tolwer.c)
+28. [tolower](src-1/ft_tolower.c)
 
 # Part 2 - Additional functions
 1. [ft_memalloc](src-2/ft_memalloc.c)
