@@ -6,12 +6,13 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 08:27:56 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/05/21 08:28:11 by ksiziva          ###   ########.fr       */
+/*   Updated: 2018/05/21 09:48:41 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_tolower(int c){
-	if(c >= 65 && c <= 90)
+int	ft_tolower(int c)
+{
+	if (c >= 65 && c <= 90)
 		c = c + 32;
-	return c;
+	return (c);
 }
