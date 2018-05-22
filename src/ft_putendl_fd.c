@@ -6,12 +6,12 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 12:15:03 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/05/22 12:17:12 by ksiziva          ###   ########.fr       */
+/*   Updated: 2018/05/22 15:25:37 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 void	ft_putendl_fd(char const *s, int fd)
 {
-	ft_putstr_fd(s,fd);
-	ft_putchar_fd('\n',fd);
+	ft_putstr_fd(s, fd);
+	ft_putchar_fd('\n', fd);
 }

@@ -6,13 +6,11 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 11:06:40 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/05/21 11:10:33 by ksiziva          ###   ########.fr       */
+/*   Updated: 2018/05/22 15:24:05 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_isprint(int c);
-
-int ft_isprint(int c)
+int	ft_isprint(int c)
 {
 	if (!(c >= 32 && c <= 126))
 		return (0);

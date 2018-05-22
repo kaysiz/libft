@@ -6,19 +6,18 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 08:33:57 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/05/21 08:36:12 by ksiziva          ###   ########.fr       */
+/*   Updated: 2018/05/22 15:17:27 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-size_t ft_strlen(const char *str);
-
-size_t strlen(const char *str) {
+size_t	strlen(const char *str)
+{
 	int i;
 
 	i = 0;
-	while(str[i] != '\0'){
+	while (str[i] != '\0')
+	{
 		i++;
 	}
-
-	return i;
+	return (i);
 }

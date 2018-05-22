@@ -6,13 +6,11 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 11:00:02 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/05/21 11:06:24 by ksiziva          ###   ########.fr       */
+/*   Updated: 2018/05/22 15:19:39 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isascii(int c);
-
-int ft_isacii(int c)
+int	ft_isacii(int c)
 {
 	if (!(c >= 0 && c <= 127))
 		return (0);
