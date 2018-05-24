@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaysiz <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/24 02:25:25 by kaysiz            #+#    #+#             */
-/*   Updated: 2018/05/24 02:42:03 by kaysiz           ###   ########.fr       */
+/*   Created: 2018/05/24 15:11:22 by ksiziva           #+#    #+#             */
+/*   Updated: 2018/05/24 15:14:08 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 		d[i] = s[i];
 		i++;
 	}
-	return(dest);
+	return (dest);
 }

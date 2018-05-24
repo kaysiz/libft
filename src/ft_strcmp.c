@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/24 15:06:39 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/05/24 15:08:28 by ksiziva          ###   ########.fr       */
+/*   Created: 2018/05/24 12:32:03 by ksiziva           #+#    #+#             */
+/*   Updated: 2018/05/24 12:50:03 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	*ft_memset(void *str, int c, size_t n)
+int ft_strcmp(const char *str1, const char *str2)
 {
-	char *p;
+	int i;
 
-	p = (char)str;
-	while (n > 0)
+	i = 0;
+	while (str1[i] && str2[i])
 	{
-		p[n - 1] = c;
-		n--;
+		if (str1[i] > str2[i])
+			return (1);
+		else if (str1[i] < str2[i])
+			return (-1);
+		i++;
 	}
+	return (0);
 }
