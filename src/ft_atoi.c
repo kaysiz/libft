@@ -6,16 +6,16 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 10:39:15 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/05/24 11:18:52 by ksiziva          ###   ########.fr       */
+/*   Updated: 2018/05/24 12:27:41 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdio.h>
+
 int	ft_isdigit(int c);
 
 int	ft_atoi(const char *str)
 {
 
-	if (*str == '\0')
+	if (str == NULL)
 		return (0);
 
 	int result;
@@ -24,26 +24,19 @@ int	ft_atoi(const char *str)
 
 	result = 0;
 	i = 0;
-	sign = 1;
-	if (str[0] == '-')
+	sign = 1;	
+	while (str[i] == '\t' || str[i] == ' ' || str[i] == '\r' || str[i] == '\f')
+		i++;
+
+	if (str[i] == '-')
+    {
+        sign = -1;
+        i++;
+    }
+	while (str[i] != '\0' && ft_isdigit(str[i]) == 1)
 	{
-		sign = -1;
+		result = (result * 10) + str[i] - '0';
 		i++;
 	}
-
-	while (str[i] != '\0')
-	{
-		if (ft_isdigit(str[i] == 0))
-				return (0);
-		result = (result * 10) + str[i] - '0';
-	}
 	return (result * sign);
-}
-
-int main()
-{
-    char str[] = "-134";
-    int val = ft_atoi(str);
-    printf("%d ", val);
-    return (0);
 }
