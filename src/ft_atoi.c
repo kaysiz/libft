@@ -6,11 +6,9 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 10:39:15 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/05/29 09:03:37 by ksiziva          ###   ########.fr       */
+/*   Updated: 2018/05/29 14:59:13 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-int	ft_isdigit(int c);
 
 int	ft_atoi(const char *str)
 {
