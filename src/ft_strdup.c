@@ -6,14 +6,14 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 08:49:08 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/05/23 16:22:53 by ksiziva          ###   ########.fr       */
+/*   Updated: 2018/05/29 11:10:07 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 char	*ft_strdup(const char *s)
 {
-	size_t	len;
 	char	*dest;
+	size_t	len;
 	int	i;
 
 	i = 0;

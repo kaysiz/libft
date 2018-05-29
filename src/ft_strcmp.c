@@ -6,11 +6,11 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 12:32:03 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/05/24 12:50:03 by ksiziva          ###   ########.fr       */
+/*   Updated: 2018/05/29 11:03:31 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_strcmp(const char *str1, const char *str2)
+int	ft_strcmp(const char *str1, const char *str2)
 {
 	int i;
 
