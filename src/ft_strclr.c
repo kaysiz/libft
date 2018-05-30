@@ -6,11 +6,11 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 14:32:10 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/05/24 14:59:53 by ksiziva          ###   ########.fr       */
+/*   Updated: 2018/05/29 10:44:54 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 void	ft_strclr(char *s)
 {
-	ft_memset(s,'\0',ft_strlen(s));
+	ft_memset(s, '\0', ft_strlen(s));
 }
