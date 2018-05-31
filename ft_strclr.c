@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   ft_strclr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/22 12:15:03 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/05/22 15:25:37 by ksiziva          ###   ########.fr       */
+/*   Created: 2018/05/24 14:32:10 by ksiziva           #+#    #+#             */
+/*   Updated: 2018/05/31 16:24:26 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_putendl_fd(char const *s, int fd)
+#include "libft.h"
+
+void	ft_strclr(char *s)
 {
-	ft_putstr_fd(s, fd);
-	ft_putchar_fd('\n', fd);
+	ft_memset(s, '\0', ft_strlen(s));
 }

@@ -1,16 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strclr.c                                        :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/24 14:32:10 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/05/29 10:44:54 by ksiziva          ###   ########.fr       */
+/*   Created: 2018/05/21 14:32:22 by ksiziva           #+#    #+#             */
+/*   Updated: 2018/05/31 16:15:49 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_strclr(char *s)
+#include "libft.h"
+
+void	ft_putstr(char const *s)
 {
-	ft_memset(s, '\0', ft_strlen(s));
+	int index;
+
+	index = 0;
+	if (s != NULL)
+	{
+		while (s[index] != '\0')
+		{
+			write(1, &s[index], 1);
+			index++;
+		}
+	}
 }
