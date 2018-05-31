@@ -1,19 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/21 11:00:02 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/05/22 15:19:39 by ksiziva          ###   ########.fr       */
+/*   Created: 2018/05/24 10:39:15 by ksiziva           #+#    #+#             */
+/*   Updated: 2018/05/31 10:25:39 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isacii(int c)
+#include "libft.h"
+
+int	ft_atoi(const char *str)
 {
-	if (!(c >= 0 && c <= 127))
+	int	result;
+	int	i;
+	int	sign;
+
+	if (str == NULL)
 		return (0);
-	else
-		return (1);
+	result = 0;
+	i = 0;
+	sign = 1;
+	while (ft_isspace(str[i]))
+		i++;
+	if (str[i] == '-')
+	{
+		sign = -1;
+		i++;
+	}
+	while (str[i] != '\0' && ft_isdigit(str[i]) == 1)
+	{
+		result = (result * 10) + str[i] - '0';
+		i++;
+	}
+	return (result * sign);
 }

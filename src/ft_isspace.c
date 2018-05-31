@@ -5,14 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/30 17:13:43 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/05/30 17:37:31 by ksiziva          ###   ########.fr       */
+/*   Created: 2018/05/31 15:24:53 by ksiziva           #+#    #+#             */
+/*   Updated: 2018/05/31 15:28:21 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int ft_isspace(int c)
 {
-    if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r')
-        return (1);
+    char    *space;
+
+    space = "\t\n\v\f\r ";
+    while (*space)
+    {
+        if (c == *space)
+            return (1);
+        space++;
+    }
     return (0);
 }

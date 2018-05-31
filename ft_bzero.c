@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/29 15:00:40 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/05/29 15:00:49 by ksiziva          ###   ########.fr       */
+/*   Created: 2018/05/24 15:09:58 by ksiziva           #+#    #+#             */
+/*   Updated: 2018/05/31 10:28:03 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
-{
-	char	*tmp;
+#include "libft.h"
 
-	tmp = (char *)malloc(sizeof(char) * n);
-	if (tmp == NULL)
-		return (NULL);
-	ft_memcpy(tmp, src, n);
-	ft_memcpy(dest, tmp, n);
-	free(tmp);
-	return (dest);
+void	ft_bzero(void *s, int n)
+{
+	ft_memset(s, 0, n);
 }

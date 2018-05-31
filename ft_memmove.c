@@ -1,16 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memalloc.c                                      :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/30 09:42:58 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/05/30 10:06:07 by ksiziva          ###   ########.fr       */
+/*   Created: 2018/05/29 15:00:40 by ksiziva           #+#    #+#             */
+/*   Updated: 2018/05/31 15:39:31 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void    *ft_memalloc(size_t size)
-{
+#include "libft.h"
 
+void	*ft_memmove(void *dest, const void *src, size_t n)
+{
+	char	*tmp;
+
+	tmp = (char *)malloc(sizeof(char) * n);
+	if (tmp == NULL)
+		return (NULL);
+	ft_memcpy(tmp, src, n);
+	ft_memcpy(dest, tmp, n);
+	free(tmp);
+	return (dest);
 }

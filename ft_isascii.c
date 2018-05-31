@@ -1,35 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/21 08:29:09 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/05/21 10:12:02 by ksiziva          ###   ########.fr       */
+/*   Created: 2018/05/21 11:00:02 by ksiziva           #+#    #+#             */
+/*   Updated: 2018/05/31 10:40:32 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_islower(int arg)
+int	ft_isascii(int c)
 {
-	if (arg >= 65 && arg <= 90)
-		return (arg);
-	else
+	if (!(c >= 0 && c <= 127))
 		return (0);
-}
-
-int	ft_isupper(int arg)
-{
-	if (arg >= 97 && arg <= 122)
-		return (arg);
 	else
-		return (0);
-}
-
-int	ft_isalpha(int c)
-{
-	if (ft_isupper(c) > 0 || ft_islower(c) > 0)
-		return (c);
-	else
-		return (0);
+		return (1);
 }
