@@ -6,7 +6,7 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 08:51:51 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/05/31 16:40:12 by ksiziva          ###   ########.fr       */
+/*   Updated: 2018/06/01 15:36:24 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,17 @@ void    ft_strclr(char *s);
 int ft_strcmp(const char *str1, const char *str2);
 char    *ft_strcpy(char *dest, const char *src);
 char    *ft_strjoin(char const *s1, char const *s2);
+void    ft_putnbr(int c);
+void    ft_putnbr_fd(int n, int fd);
+char	*ft_strjoin(char const *s1, char const *s2);
+size_t	ft_strlcat(char *dest, const char *src, size_t n);
+size_t	ft_strlen(const char *str);
+char	*ft_strncat(char *dest, const char *src, size_t n);
+char	*ft_strncpy(char *dest, const char *src, size_t n);
+char	*ft_strnstr(const char *s1, const char *s2, size_t n);
+char	*ft_strstr(const char *s1, const char *s2);
+int	ft_tolower(int c);
+int	ft_toupper(int c);
+char	*ft_strrchr(const char *s, int c);
 
 #endif
