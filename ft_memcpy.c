@@ -6,9 +6,11 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 15:11:22 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/05/24 15:14:08 by ksiziva          ###   ########.fr       */
+/*   Updated: 2018/06/04 12:57:42 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {

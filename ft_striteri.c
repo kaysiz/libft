@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/21 13:27:48 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/06/04 16:10:30 by ksiziva          ###   ########.fr       */
+/*   Created: 2018/06/04 11:18:39 by ksiziva           #+#    #+#             */
+/*   Updated: 2018/06/04 11:25:56 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-void	ft_putchar(char c)
+void	ft_strietri(char *s, void (*f) (unsigned int, char *))
 {
-	write(1, &c, 1);
+	unsigned int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		f(i, s + i);
+		i++;
+	}
 }

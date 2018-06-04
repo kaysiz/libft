@@ -6,13 +6,13 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 09:10:53 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/06/01 11:06:45 by ksiziva          ###   ########.fr       */
+/*   Updated: 2018/06/04 16:32:59 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr(int c)
+void	ft_putnbr(int n)
 {
 	if (n == -2147483648)
 		ft_putstr("-2147483648");

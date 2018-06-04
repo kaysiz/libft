@@ -6,11 +6,13 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 14:53:18 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/05/21 15:19:05 by ksiziva          ###   ########.fr       */
+/*   Updated: 2018/06/04 16:29:20 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_pustr_fd(char const *s, int fd)
+#include "libft.h"
+
+void	ft_putstr_fd(char const *s, int fd)
 {
 	int index;
 
