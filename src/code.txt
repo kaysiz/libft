@@ -1,0 +1,2332 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/24 20:01:57 by pbie              #+#    #+#             */
+/*   Updated: 2015/12/03 17:18:25 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+	/*This is a recreation of the atoi function in C. We take a string of
+	 * characters that are supposed to be a number converted into an int.
+	 * According to the man, "The atoi function converts the initial portion of
+	 * the string point to by str to int representation."*/
+
+int			ft_atoi(const char *str)
+{
+	/*We start off by creating three variables. The first is what will hold our
+	 * result that is to be returned. We use long because it is guaranteed to
+	 * be able to store, at the very least, values that lie within the range of
+	 * -2147483647 and 2147483647. Sign will be what we use to turn the int
+	 * negative in the event that its a negative number that is put in the
+	 * string. We have it as a long so we can multiply our result by it in the
+	 * end. We next have an unsigned int i, which will be the counter for our
+	 * string. In order to be able to compensate for an incredibly long string
+	 * we use an unsigned int to be able to use its extended positive range it
+	 * has over a signed int. We will set all of them to 0 except for our sign
+	 * which we set at 1 to use based based on the appearance of a negative
+	 * symbol in our string*/
+	long			res;
+	long			sign;
+	unsigned int	i;
+
+	res = 0;
+	sign = 1;
+	i = 0;
+	/*The first thing we want our function to do is make sure to skip over any
+	 *kind of spacing that could be found at the beginning of the string.*/
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' ||
+			str[i] == '\r' || str[i] == '\v' || str[i] == '\f')
+		i++;
+	/*Once past the extra spacing, if it exists, we are checking to see if there
+	 *is a negative symbol at the beginning of the number we will be converting.
+	 if we see a negative symbol or a positive symbol we adjust accordingly. If
+	 it's negative we set our sign equal to -1 to multiply to our result when 
+	 we return it.*/
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			sign = -1;
+		i++;
+	}
+	/*Here we convert our string of characters from char to int so long as they
+	 * are numbers. If the character we are currently on is a number, we
+	 * converted it to its ascii numerical value. For the first character res
+	 * is always set currently at 0. We multiply 10 immediately by our res to
+	 * set up the digit placement where it should be. We then subtract the
+	 * numerical value of the character 0 on the ascii table from our currently
+	 * character number. This sets it to its ascii numerical value. We then
+	 * start our loop over and continue until we hit a character that is not a
+	 * number.*/
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		res = res * 10 + str[i] - '0';
+		i++;
+	}
+	/*Last we return the res value multiplied by the sign value to return the
+	 * number based on whether it was negative or not. NOTE: We have int in
+	 * parenthesis to cast the rest * sign into a int so it can be returned as
+	 * an int.*/
+	return ((int)(res * sign));
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/26 16:46:03 by pbie              #+#    #+#             */
+/*   Updated: 2015/12/07 22:12:47 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*According to the man this function writes n zeroed bytes to the string s. If
+ * n is zero, ft_bzero does nothing. Another way of saying this is that we will
+ * be making a string of size n and filling each index position with a 0. We
+ * use our previously made ft_memset function to do this. Review ft_memset to
+ * understand how it works and notice the parameters we give it here when we
+ * call it. We set it ahead of time to fill whatever string at size n with 0s.*/
+
+void		ft_bzero(void *s, size_t n)
+{
+	ft_memset(s, 0, n);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/26 15:32:25 by pbie              #+#    #+#             */
+/*   Updated: 2015/11/26 15:35:26 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+int			ft_isalnum(int c)
+{
+	if (ft_isalpha(c) || ft_isdigit(c))
+		return (1);
+	else
+		return (0);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/26 15:21:51 by pbie              #+#    #+#             */
+/*   Updated: 2015/11/30 20:28:18 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+int		ft_isalpha(int c)
+{
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+		return (1);
+	else
+		return (0);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/26 15:35:39 by pbie              #+#    #+#             */
+/*   Updated: 2015/12/04 16:48:45 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+int			ft_isascii(int c)
+{
+	if (c >= 0 && c <= 127)
+		return (1);
+	else
+		return (0);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/26 15:25:41 by pbie              #+#    #+#             */
+/*   Updated: 2015/11/26 15:32:03 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+int			ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	else
+		return (0);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/26 15:37:55 by pbie              #+#    #+#             */
+/*   Updated: 2015/11/26 17:56:25 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+int			ft_isprint(int c)
+{
+	if (c >= ' ' && c <= '~')
+		return (1);
+	else
+		return (0);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/24 18:43:26 by pbie              #+#    #+#             */
+/*   Updated: 2015/12/03 15:53:18 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*This function allocates memory and returns a 'fresh' string of characters
+ * terminated with a '\0' that is the char equivalent of the int passed in
+ * the parameter. Negative numbers should be managed as well. If the allocation
+ * fails the function will return NULL. NOTE: This is a recursive function. If
+ * you are unfamiliar with recursive functions it is a function which either
+ * calls itself or is in a potential cycle of function calls.*/
+
+char		*ft_itoa(int n)
+{
+	/*We start by creating a char string variable. This is what our function
+	 * will return. We then allocate memory for our string variable str. NOTE:
+	 * We only allocate memory for a size of 2 char values. This is because
+	 * we will be doing this function recusively and we want to allocate memory
+	 * only as we need it. We do a size of 2 in our malloc function because we
+	 * want to do one character at a time from the given int n, one space for
+	 * the one digit number converted to a char and the terminating '\0' that
+	 * is needed to finish that individual char's string. If the allocation
+	 * fails we return NULL. We also want to compensate for the chance the int
+	 * passed to us is the smallest integer possible. If we are passed that
+	 * number into our parameter we make sure we return a string of it.*/
+	char	*str;
+
+	if (!(str = (char *)malloc(sizeof(char) * 2)))
+		return (NULL);
+	if (n == -2147483648)
+		return (ft_strcpy(str, "-2147483648"));
+	/*Next we want to see if the int that is passed in our parameter is a
+	 * negative number. If int n is less than zero then we make our 'fresh'
+	 * string str's index position 0 a negative sign and postion 1 a
+	 * terminating '\0'. We then set string str equal to ft_strjoin with our
+	 * str as a parameter and we recursively call our function with a -n so as
+	 * to turn the negative int into a postive. We then start the function over
+	 * again.*/
+	if (n < 0)
+	{
+		str[0] = '-';
+		str[1] = '\0';
+		str = ft_strjoin(str, ft_itoa(-n));
+	}
+	/*Below we are saying if the int n passed in our paramter is greater than
+	 * 10 that we want to break it down recursively so we can build it back
+	 * up as a string. We do this by setting our memory allocated string str
+	 * equal to our previously made ft_strjoin function and pass it the
+	 * parameter of our ft_itoa function with n divided by 10 and our ft_itoa
+	 * function with n modulus 10. This is where the idea of how recursion 
+	 * works can be hard to understand. This use of ft_strjoin will not happen 
+	 * until later because we are calling ft_itoa again. This will divide our
+	 * given int by 10 and take the result and start the function over again,
+	 * consitently breaking it down until we have the very first number in our
+	 * int. For example if we started with the number n = 123 our call of
+	 * ft_itoa(n / 10) and ft_itoa(n % 10) is really ft_itoa(123 / 10) and
+	 * ft_itoa(123 % 10). This will call ft_itoa on a value of 12 for the
+	 * division by 10 and call ft_itoa on the value of 3 for our modulus 10.
+	 * This is how we break down the number into individual digits. For our
+	 * result of 3 it will begin this function over again and skip this section
+	 * since it will now be a value that is less than 10. We see in our next 
+	 * else if statment that if the number is greater than 0 and less than 10
+	 * we convert it here into an indiviual string that would be "3\0" because
+	 * we must have a terminating '\0'. This individual string will be
+	 * returned to the ft_strjoin function it was called in to be joined
+	 * with the string that will be return from its fellow parameter. But what
+	 * has happened to the ft_itoa(123 / 10)? Well that has given us the number
+	 * 12 to put into this ft_itoa function. Since this number is still greater
+	 * than 10 we will the if statement that will use ft_strjoin with the
+	 * two ft_itoa functions passed into it's paramters, but this time on the
+	 * value of 12. As has happened earlier with the full value of 123 we will
+	 * be splitting this 12 now into an individual 1 and 2. Running ft_itoa on
+	 * each individual number. Since both numbers are a value less than 10 but
+	 * greater than 0 we will convert them each into a string. So at this point
+	 * we now have the strings "1\0", "2\0", and from our earlier call of 
+	 * ft_itoa(123 % 10) we have the string "3\0". Since we have reached an end
+	 * return point for our recursion we will be combining first the strings
+	 * "1\0" and "2\0" inside the ft_strjoin function they are currently inside
+	 * making them into the string "12\0". This brings us back up a level in 
+	 * our recursion to now join "12\0" with the string "3\0" making the string
+	 * "123\0". Since this has been placed now into our string str (NOTE: we
+	 * have been allocating memory for each string on each call of ft_itoa in
+	 * our recursion) we can return it now that the entire number has been
+	 * converted into a char string. Thus ending our function. If this has been
+	 * hard to picture in your head try walking the function through on a piece
+	 * of paper. It should break down as sort of a binary tree.*/
+	else if (n >= 10)
+		str = ft_strjoin(ft_itoa(n / 10), ft_itoa(n % 10));
+	else if (n < 10 && n >= 0)
+	{
+		str[0] = n + '0';
+		str[1] = '\0';
+	}
+	return (str);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstadd.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/12/01 18:21:05 by pbie              #+#    #+#             */
+/*   Updated: 2015/12/02 19:04:11 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*In this function we will be adding a new link, called 'new' that is passed
+ * in our parameters, to a list and placing this link at the head of our list.*/
+
+void		ft_lstadd(t_list **alst, t_list *new)
+{
+	/*First we check to make sure the link new that is passed to our parameters
+	 * is NULL. If it is not, we set our link new's element next to the first 
+	 * link that is pointed to by alst in our parameters. We then set the
+	 * pointer of alst to new, thus setting it to the head of our linked list.*/
+	if (new != NULL)
+	{
+		new->next = *alst;
+		*alst = new;
+	}
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstdel.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/12/01 17:55:55 by pbie              #+#    #+#             */
+/*   Updated: 2015/12/02 19:00:32 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*With this function we will be taking in as a parameter the address of a
+ * pointer on a link and freeing the memory of this link and all of the 
+ * links following it one after another using the function 'del' that has been 
+ * passed in as a parameter as well. We will also be using the function free. 
+ * In order to terminate the link, the pointer on the first link, once freed, 
+ * should be set to NULL.*/
+
+void		ft_lstdel(t_list **alst, void (*del)(void *, size_t))
+{
+	/*First we declare two link structures, one will be a temporary place
+	 * holder and the other will hold the next link in the list.*/
+	t_list	*tmp;
+	t_list	*next;
+
+	/*We set our temporary link to hold the link pointed to in our parameter,
+	 * alst. We the check to make sure that the function passsed in our
+	 * parameter is not NULL.*/
+	tmp = *alst;
+	if (del != NULL)
+	{
+		/*If the del function is not NULL we begin our loop in the process of
+		 * deleting our parameter passed link and all the others following it
+		 * in the linked list. We do this by saying loop so long as tmp, which
+		 * is holding the current link, is not equal to NULL, which would mean 
+		 * we have reached the end of our list.*/
+		while (tmp != NULL)
+		{
+			/*We take our current link's element next (the link following it)
+			 * and place it into our link variable next. Separating it from
+			 * the current link. We then run our del function that was passed
+			 * in our parameters and give it as parameters our current link's 
+			 * content element and content_size element. Once those are deleted
+			 * we the free the memory that is allocated in our tmp variable.
+			 * We then set our next variable, which currently holds the link
+			 * that should be following the one we just deleted, and put it
+			 * into our tmp variable and start the loop again until we reach
+			 * NULL. Thus ending the loop.*/
+			next = tmp->next;
+			del(tmp->content, tmp->content_size);
+			free(tmp);
+			tmp = next;
+		}
+		/*Once our loop is done and everything is deleted we then set the link
+		 * alst to NULL. Effectively deleting the parameter passed link and
+		 * all of those that were following it.*/
+		*alst = NULL;
+	}
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/12/01 17:17:21 by pbie              #+#    #+#             */
+/*   Updated: 2015/12/02 18:26:23 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/*In this function we are taking in, as a parameter, the address of a pointer on 
+ * a link and freeing the memory content of the link with the function 'del'
+ * that has been passed as a parameter as well in order to free the memory of 
+ * the link. The memory of the element next should never be freed. In order to
+ * terminate the link, the pointer on the current link should be put to NULL.*/
+
+#include "libft.h"
+
+void		ft_lstdelone(t_list **alst, void (*del)(void *, size_t))
+{
+	/*First we check to make sure that the parameters that were passed into our
+	 * function are not NULL. If they are not we then run our parameter passed
+	 * function del by giving it's parameters our link alst's content and
+	 * content_size. Once the function has deleted alst's content we the free
+	 * the memory that was allocated to alst and then set it to NULL. Thus
+	 * deleting on link in our list.*/
+	if (del != NULL && alst != NULL)
+	{
+		del((**alst).content, (**alst).content_size);
+		free(*alst);
+		*alst = NULL;
+	}
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/12/01 19:12:09 by pbie              #+#    #+#             */
+/*   Updated: 2015/12/02 19:10:43 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*This function will be taking the function f, passed in the parameters, and
+ * applying it to every link in our linked list.*/
+
+void		ft_lstiter(t_list *lst, void (*f)(t_list *elem))
+{
+	/*First we check to make sure our parameter of function f is not NULL.*/
+	if (f != NULL)
+	{
+		/*If it is not NULL we start our loop through our linked list applying
+		 * function f to each link. Once it has been applied we set the current
+		 * link to be it's element next, setting it to the following link and
+		 * then starting the loop over again until we reach the end by hitting
+		 * NULL.*/
+		while (lst != NULL)
+		{
+			f(lst);
+			lst = lst->next;
+		}
+	}
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/12/02 16:32:50 by pbie              #+#    #+#             */
+/*   Updated: 2015/12/02 20:37:19 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*This function takes the list of lst passed in the parameter and applies to
+ * each link the function f (also passed in the parameter) and creates and 
+ * returns a "fresh" list. This results in successive applications of the
+ * function recursively until the end of the list is reached and the newlist
+ * is returned.*/
+
+t_list		*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
+{
+	/*First we create a new t_list structure variable newlist*/
+	t_list *newlist;
+	/*We then make sure that both the list passed as well as the function f are 
+	 *not NULL. If they are we will return NULL. If not we will run the function
+	 f on the link lst and set it into our newlist link variable. NOTE: We are
+	 to assume that the function f allocates memory for our newlist variable
+	 based on the data of lst. We then check if newlist is null as well as if
+	 the link lst's element next is NULL. If neither are NULL we set our newlist
+	 element next equal to the ft_lstmap function which has been passed lst's
+	 element next (the link following it) as well as the function f. This allows
+	 us to recursively apply the function f to all of the links and allows us to
+	 allocate memory based on how many indiviual links we have in our list. Once
+	 lst->next becomes equal to NULL this will break us out of the recursion and
+	 have us return the newlist.*/
+	if (lst != NULL && f != NULL)
+	{
+		newlist = f(lst);
+		if (newlist != NULL && lst->next != NULL)
+			newlist->next = ft_lstmap(lst->next, f);
+		return (newlist);
+	}
+	return (NULL);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/12/01 16:41:20 by pbie              #+#    #+#             */
+/*   Updated: 2015/12/02 18:17:52 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*We will be allocating memory for, and returning, a "fresh" linked list. The 
+ * elements content and content_size within our new link will be copied from the 
+ * parameters of the function. If the parameter content is NULL the the element 
+ * content_size is initialized to 0 regardless of the paramter of content_size.
+ * The element of next is initialized to NULL. If the memory allocation fails
+ * then we will return NULL*/
+
+t_list			*ft_lstnew(void const *content, size_t content_size)
+{
+	/*We first declare a new t_list structure called 'new'*/
+	t_list		*new;
+	/*We then proceed to allocate the memory required for the stucture to exist*/
+	new = (t_list *)malloc(sizeof(t_list) * 1);
+	/*In the event that the memory allocation failed we return NULL*/
+	if (new == NULL)
+		return (NULL);
+	/*If the parameter of content is NULL we set the content element to NULL
+	 * and the content_size element to 0 regardless of the parameter given*/
+	if (content == NULL)
+	{
+		new->content = NULL;
+		new->content_size = 0;
+	}
+	/*If the above is not the case we move on. We allocate memory for our new
+	 * linked list's element content by using our parameter of content_size.
+	 * If the allocation fails for this we return NULL. If it works we use our
+	 * ft_memmove function to move the data from our parameters into our linked
+	 * new's content element. And last we set our link new's content_size to
+	 * our parameter content_size*/
+	else
+	{
+		new->content = malloc(content_size);
+		if (new->content == NULL)
+			return (NULL);
+		ft_memmove(new->content, content, content_size);
+		new->content_size = content_size;
+	}
+	/*Last we set our new link list new's next element to NULL so that we know
+	 * that we are at the end of the list. We then return our new link.*/
+	new->next = NULL;
+	return (new);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/26 18:32:41 by pbie              #+#    #+#             */
+/*   Updated: 2015/12/02 20:53:02 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+	/*This function is designed to allocate and return a "fresh" zone of memory.
+	 *The memory allocated is initialized to 0 using our ft_bzero function. If
+	 the allocation fails we return NULL.*/
+
+void		*ft_memalloc(size_t size)
+{
+	/*We first make a void variable of pointer m. This is so that we can use the
+	 *zone of allocated memory that will be applied to it for any type of data.*/
+	void	*m;
+	/*We then use malloc to allocate memory to our m variable based on the size
+	 *given in the parameter. If the allocation fails we return NULL. Otherwise
+	 we then run the function ft_bzero on our allocated zone of memory m and
+	 give it our size parameter. We then return our void variable m.*/
+	m = malloc(size);
+	if (m == NULL)
+		return (NULL);
+	ft_bzero(m, size);
+	return (m);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/26 18:04:23 by pbie              #+#    #+#             */
+/*   Updated: 2015/12/07 22:33:03 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*According to the man this function copies bytes from string src to string dst.
+ * If the character c (as converted to an unsigned char) occurs in the string
+ * src, the copy stops and a pointer to the byte after the copy of c in the
+ * string dst is returned. Otherwise, n bytes are copied, and a NULL pointer is
+ * returned. The source and destination strings should not overlap, as the 
+ * behavior is undefined.*/
+
+void		*ft_memccpy(void *dst, const void *src, int c, size_t n)
+{
+	/*We start off this function the same way we did in our ft_memcpy function.
+	 * We declare a size_t counter variable i that will be used to move through
+	 * the index positions of our char casted strings and we will use this
+	 * variable in comparison to our given size_t n. We also make two char
+	 * pointer variables that we will place our casted dst and src parameters
+	 * inside. We set i to 0 to start from the beginning index position and we
+	 * place casted version of our parameters dst and src into their respective
+	 * variables. We then move to our loop.*/
+	size_t	i;
+	char	*dst2;
+	char	*src2;
+
+	i = 0;
+	dst2 = (char *)dst;
+	src2 = (char *)src;
+	/*While our variable counter i is less than the given n we will continue
+	 * our loop. Inside we set index position i of src2 into index position i
+	 * of dst2. If the casted src2 unsigned character at index position i is
+	 * equal to the given c, that is also casted to an unsigned char, then we
+	 * immediately return a char casted pointer to the index position after it 
+	 * in our original given dst parameter. If we never come across c before i
+	 * is no longer less than n we will return NULL.*/
+	while (i < n)
+	{
+		dst2[i] = src2[i];
+		if ((unsigned char)src2[i] == (unsigned char)c)
+			return ((char *)dst + i + 1);
+		i++;
+	}
+	return (NULL);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/26 17:23:50 by pbie              #+#    #+#             */
+/*   Updated: 2015/12/07 22:55:12 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*According to the man this function locates the first occurence of c (converted
+ * to an unsigned char) in string s. ft_memchr returns a pointer to the byte
+ * located, or NULL if no such byte exists within n bytes.*/
+
+void		*ft_memchr(const void *s, int c, size_t n)
+{
+	/*We start by creating a char pointer str that we will be placing a casted
+	 * version of our s parameter into. We also create a size_t variable i that
+	 * we will use as a counter. We make it size_t in order to compare it to
+	 * the given size_t n in our loop condition. We i equal to 0 since we will
+	 * also be using it to start at the beginning of our string str. We cast s
+	 * as a char pointer and place it inside our str variable. We then enter
+	 * our loop.*/
+	char	*str;
+	size_t	i;
+
+	i = 0;
+	str = (char *)s;
+	/*While our i variable is less than the parameter n we will have our loop
+	 * continue. Inside we want to see if the current index position that has
+	 * been casted as an unsigned char is equal to the parameter c that has
+	 * also been casted as an unsigned char. If this statement is true we will
+	 * return a char casted pointer to the index position that contains c. If
+	 * i is no longer less than n and we still have not located c, we will
+	 * return NULL.*/
+	while (i < n)
+	{
+		if ((unsigned char)str[i] == (unsigned char)c)
+			return ((char *)s + i);
+		i++;
+	}
+	return (NULL);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/26 18:21:12 by pbie              #+#    #+#             */
+/*   Updated: 2015/12/07 23:05:04 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*According to the man this function compares byte string s1 against byte string
+ * s2. Both strings are assumed to be n bytes long. The ft_memcmp function
+ * returns zero if the two strings are identical, otherwise it returns the
+ * difference between the first two differing bytes (treated as unsigned char
+ * values, so that '\200' is greater than '\0', for example). Zero-length
+ * strings are always identical.*/
+
+int			ft_memcmp(const void *s1, const void *s2, size_t n)
+{
+	/*We start by creating two char pointer variables that we will be placing
+	 * char casted versions of our parameters s1 and s2 inside. We also create
+	 * a size_t variable i to count through the index positions of str1 and
+	 * str2 as well as use it to compare to the parameter n which is also a
+	 * size_t. We set i equal to 0 and we place the casted versions of s1 and
+	 * s2 into str1 and str2. We then start our loop.*/
+	char	*str1;
+	char	*str2;
+	size_t	i;
+
+	i = 0;
+	str1 = (char *)s1;
+	str2 = (char *)s2;
+	/*So long as i is less than the given n we will want our loop to continue.
+	 * But if at any point before then, and if we reach an index position where
+	 * the character in str1 is not the same as str2, we want to immediately
+	 * return the difference between the two differing unsigned char casted
+	 * bytes. If i reaches the point where it is no longer less than n and we
+	 * have still not found any differing bytes we will return a 0 to say that
+	 * both byte strings are the same.*/
+	while (i < n)
+	{
+		if (str1[i] != str2[i])
+			return ((unsigned char)str1[i] - (unsigned char)str2[i]);
+		i++;
+	}
+	return (0);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/26 17:04:45 by pbie              #+#    #+#             */
+/*   Updated: 2015/12/07 22:21:33 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*According to the man this function copies n bytes from memory area src to 
+ * memory area dst. If dst and src overlap, behavior is undefined. Applications
+ * in which dst and src might overlap should use ft_memmove instead. This
+ * function returns the original value of dst.*/
+
+void		*ft_memcpy(void *dst, const void *src, size_t n)
+{
+	/*We start by making three variable. The first one will be our counter that
+	 * we will be using to perform our loop and move through the index
+	 * positions of each given string. Because we will be doing our loop only
+	 * as long as we are smaller than the given size_t n we want to make sure
+	 * we make our counter variable a size_t as well so we can compare it to n.
+	 * Next we make two char pointer variables. We set our counter to 0 and we
+	 * cast our given parameter strings into char pointers and place them
+	 * inside our d and s char pointer variables. Then we begin our loop.*/
+	size_t	i;
+	char	*d;
+	char	*s;
+
+	i = 0;
+	d = (char *)dst;
+	s = (char *)src;
+	/*So long as our counter i is smaller than the given size_t n we want our
+	 * loop to continue since we are copying n bytes from memory area src to 
+	 * memory area dst. Inside our loop we place index position i of s (which
+	 * currently holds src) into index position i of d (which currently holds
+	 * memory area dst). We increment our i and continue the loop until i is no
+	 * longer smaller than n. We then return dst.*/
+	while (i < n)
+	{
+		d[i] = s[i];
+		i++;
+	}
+	return (dst);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memdel.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/27 15:13:10 by pbie              #+#    #+#             */
+/*   Updated: 2015/12/02 20:59:55 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*This function takes in the parameter of the address of a pointer. The zone
+ *pointed to should be liberated with free. The pointer is then set to NULL.*/
+
+void		ft_memdel(void **ap)
+{
+	free(*ap);
+	*ap = NULL;
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/26 17:11:32 by pbie              #+#    #+#             */
+/*   Updated: 2015/12/07 22:44:13 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*According to the man this function copies len bytes from string src to string
+ * dst. The two strings may overlap; the copy is always done in a non
+ * destructive manner. The ft_memmove function returns the original value of
+ * dst.*/
+
+void		*ft_memmove(void *dst, const void *src, size_t len)
+{
+	/*We start by creating a char pointer variable tmp which we will use to 
+	 * move len bytes of src into and then we will move the len bytes of src we
+	 * placed into tmp into dst. We do this using our ft_memcpy function. But 
+	 * before we do this we have to make sure to allocate memory for tmp to be 
+	 * able to hold the bytes of src to move them to dst. We use our given len 
+	 * parameter to determine the size of the malloc for tmp. If the allocation 
+	 * fails we will return NULL. If not we will go ahead and use ft_memcpy 
+	 * first on tmp, src, and len, and then we will call it again on dst, tmp, 
+	 * and len. Once our memory move is finished we will then free the memory 
+	 * we allocated for tmp. And last we will return the original value of dst.*/
+	char	*tmp;
+
+	tmp = (char *)malloc(sizeof(char) * len);
+	if (tmp == NULL)
+		return (NULL);
+	ft_memcpy(tmp, src, len);
+	ft_memcpy(dst, tmp, len);
+	free(tmp);
+	return (dst);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/26 16:34:33 by pbie              #+#    #+#             */
+/*   Updated: 2015/11/26 16:43:00 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*This function is a copy of the memset function in the string.h library.
+ * According to the man the memset function writes len bytes of value c
+ * (converted to an unsigned char) to the string b. This function returns it's
+ * first argument.*/
+
+void		*ft_memset(void *b, int c, size_t len)
+{
+	/*We start by creating a char string of p. This is what we will use to hold
+	 * a casted version of our void b parameter. We set p equal to a char cast
+	 * version of b. If you are unfamiliar with type casting, it is a way to
+	 * convert a variable from one data type to another data type. We then
+	 * start our loop. ft_memset nees to trust the size of len that is passed
+	 * into it's parameter and it needs to work on a general piece of memory,
+	 * not just a '\0' terminated string, so we can not have our loop's
+	 * condition based on the usual idea that we will reach the end of a string.
+	 * So in this case we say so long as the given len is greater than 0 we
+	 * will continue the loop. We then move backwards through the string p
+	 * placing the int c inside of each index position. We do len - 1 because
+	 * we are compensating for the terminating '\0' at the end of the string
+	 * that we do not want to replace. We decrement len and then start the
+	 * loop over again until len is no longer greater than 0. We then return
+	 * b.*/
+	char	*p;
+
+	p = (char *)b;
+	while (len > 0)
+	{
+		p[len - 1] = c;
+		len--;
+	}
+	return (b);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/23 16:53:45 by pbie              #+#    #+#             */
+/*   Updated: 2015/11/27 18:12:32 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*This function that writes a single character to the standard output stream of
+ * the terminal. This is one of the most basic and essential of all the
+ * functions in our library. We use the write function to achieve our
+ * desired output. The character we want to output is held in the ft_putchar
+ * parameter variable char c. This can be any printable character which look to
+ * our ft_isprint function to know which characters are printable.The 
+ * first parameter in the write function is the file descriptor of where to
+ * write the output. You can either use a file descriptor obtained from the
+ * open system call, or you can use 0, 1, or 2, to refer to the standard input,
+ * standard output, or standard error, respectively. In this case we want the
+ * standard output so we use 1. The next parameter is a null terminated
+ * character string of the content to write. We give the address to our char c
+ * parameter. The last parameter is the number of bytes to write. Since we have
+ * one character we want to write that is 1 byte so we put a 1 as the parameter.
+ * This will place our char c to the standard output.*/
+
+void		ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/30 14:36:07 by pbie              #+#    #+#             */
+/*   Updated: 2015/11/30 14:36:59 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*This function is exactly the same as our ft_putchar function except that this
+ * function requires the file descriptor of where to write the output as a
+ * parameter. So, rather than automatically writing to the standard output, we
+ * choose if we want the to use a file descriptor obtained from the open
+ * system call, or we use 0, 1, or 2, to refer to the standard input, standard
+ * output, or standard error, respectively. We use the write function as we did
+ * in the ft_putchar function but this time rather than having the first
+ * parameter of write be a 1 for the standard output we take ft_putchar's
+ * int fd parameter and use it as the first parameter for write. We still use
+ * the address to our char c null terminated character string as the content
+ * to write, and we still know that we will be writing only one character to
+ * our desired file descriptor so we use 1 since we will be writing 1 byte.*/
+
+void		ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putendl.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/30 14:12:49 by pbie              #+#    #+#             */
+/*   Updated: 2015/11/30 14:15:18 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*This function will display the string s on the standard output followed by a
+ *'\n', which is a new line. We do this by using our ft_putstr and ft_putchar 
+ * functions that we previously made. We use our ft_putstr on our string s to
+ * display it on the standard output. Then we use our ft_putchar to have our
+ * string followed by a new line.*/
+
+void		ft_putendl(char const *s)
+{
+	ft_putstr(s);
+	ft_putchar('\n');
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/30 14:42:13 by pbie              #+#    #+#             */
+/*   Updated: 2015/11/30 14:49:00 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*This function writes the string s to the file descriptor fd followed by a
+ * '\n' to make a new line. This function is exactly the same as our ft_putendl
+ * function except that we take in a parameter for the file descriptor. We will
+ * use our ft_putstr_fd and ft_putchar_fd functions to make this function work.
+ * Please review ft_putstr_fd and ft_putchar_fd to understand the inner
+ * workings of this function.*/
+
+void		ft_putendl_fd(char const *s, int fd)
+{
+	ft_putstr_fd(s, fd);
+	ft_putchar_fd('\n', fd);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/30 14:15:59 by pbie              #+#    #+#             */
+/*   Updated: 2015/11/30 15:10:11 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*This function will display the integer n on the standard output. This
+ * function is similar to our ft_itoa function because we will be doing it
+ * recursively. We will be breaking down int number as a whole into individual
+ * single digit numbers and we will convert those int numbers into characters
+ * that we will display on the standard output using our ft_putchar function.*/
+
+void		ft_putnbr(int n)
+{
+	/*We start by seeing if the int passed in parameter is -2147483648. The
+	 * number 2147483648 is the largest number an int variable can possibly
+	 * hold. When a negative sign is placed in front of it our function is not
+	 * able to handle it. So we check to see if a negative version has been
+	 * given and if so we just immediately return it.*/
+	if (n == -2147483648)
+		ft_putstr("-2147483648");
+	/*If -2147483648 has not been given we then check to see if another
+	 * negative number has been given. If the number is negative we immediately
+	 * use ft_putchar('-') to display the minus sign to the standard output. We
+	 * then call ft_putnbr again on a negative version of the variable n,
+	 * making it a positive number and we run the function again from the start.
+	 * If our given number is not negative we move to the next else if.*/
+	else if (n < 0)
+	{
+		ft_putchar('-');
+		ft_putnbr(-n);
+	}
+	/*We now check to see if the number is greater than or equal to 10. If it
+	 * is we begin to break down the number recursively to each individual
+	 * digit, where we will then convert it into a character. Similar to our
+	 * breakdown recursively in our ft_itoa we are one again going to use a
+	 * division by 10 and a modulus by 10. The division by 10 will take us
+	 * further into the recursion until we finally reach the very first number
+	 * in our int. If you look at the modulus 10 we use a + '0' to convert
+	 * the number into a char value. Though this seems like it will be put to
+	 * the standard output immediately, it will actually happen last since it
+	 * will be the last thing to happen when we backtrack out of our recursion.
+	 * If you are having difficulty understanding recusion you should write
+	 * out the steps this function will take on a piece of paper. Like ft_itoa
+	 * it should make an image that looks like a binary tree. At then end of
+	 * our deconstruction of digits we will add '0' to the int to make it have
+	 * a character value. We will use ft_putchar on this digit to display it
+	 * on the standard output and then back track through our recursion until
+	 * every individual digit has been displayed.*/
+	else if (n >= 10)
+	{
+		ft_putnbr(n / 10);
+		ft_putchar(n % 10 + '0');
+	}
+	else
+		ft_putchar(n + '0');
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/30 14:50:32 by pbie              #+#    #+#             */
+/*   Updated: 2015/11/30 21:48:20 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*This function is exactly the same as our ft_putnbr function except that we
+ * will be using our ft_putchar_fd function instead of ft_putchar beacuse we 
+ * will be accepting a parameter for this function that is our file descriptor.
+ * I recommend learning how the ft_putnbr and ft_putchar_fd functions work in
+ * order to understand how this function works. The explanation of the inner
+ * workings of this function are the same as I gave for ft_putnbr.*/
+
+void		ft_putnbr_fd(int n, int fd)
+{
+	if (n == -2147483648)
+		ft_putstr_fd("-2147483648", fd);
+	else if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		ft_putnbr_fd(-n, fd);
+	}
+	else if (n >= 10)
+	{
+		ft_putnbr_fd(n / 10, fd);
+		ft_putchar_fd(n % 10 + '0', fd);
+	}
+	else
+		ft_putchar_fd(n + '0', fd);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/23 16:56:53 by pbie              #+#    #+#             */
+/*   Updated: 2015/11/30 16:48:01 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*This function displays the string s to the standard output. We do this using
+ * our ft_putchar function. We start by declaring a size_t variable i that we
+ * will use to move through our string. We use a size_t because it is
+ * guaranteed to be big enough to contain the size of the biggest object your
+ * system can handle. This way we can display the absolute biggest string that
+ * our computer can handle. We set i equal to 0 to start at the beginning of
+ * the parameter string s. We then do a simple loop stating that so long as we
+ * have not reached the end of our string we want the loop to continue. We move
+ * to each index position of our string and place the character in that
+ * position as a parameter for our ft_putchar function. The ft_putchar function
+ * will put that character in the standard output and then we increment the i
+ * variable to continue moving through the string. We do this until we reach
+ * the terminating '\0' of the string.*/
+
+void		ft_putstr(char const *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+	{
+		ft_putchar(s[i]);
+		i++;
+	}
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/30 14:37:12 by pbie              #+#    #+#             */
+/*   Updated: 2015/11/30 14:49:26 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*This function is exactly the same as our ft_putstr function except that we
+ * are requiring a file descriptor in the parameter along with the desired
+ * string to be to be written. As we do in our ft_putchar_fd function, we use
+ * a file descriptor obtained from the open system call, or we can use 0, 1, or
+ * 2, to refer to the standard input, standard output, or standard error. We
+ * use the fd parameter as the first parameter in our write function. We then
+ * place our string as write's next parameter. Last we use ft_strlen on our
+ * string so we know how many bytes will need to be written, which is the same
+ * as the length of the given string. Write will then write string s to the
+ * desired output.*/
+
+void		ft_putstr_fd(char const *s, int fd)
+{
+	write(fd, s, ft_strlen(s));
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/23 19:17:48 by pbie              #+#    #+#             */
+/*   Updated: 2015/11/23 19:31:49 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+char		*ft_strcat(char *s1, const char *s2)
+{
+	char	*dst;
+	char	*src;
+
+	dst = s1;
+	src = (char *)s2;
+	while (*dst)
+		dst++;
+	while (*src)
+	{
+		*dst = *src;
+		dst++;
+		src++;
+	}
+	*dst = '\0';
+	return (s1);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/24 18:38:56 by pbie              #+#    #+#             */
+/*   Updated: 2015/11/26 17:44:42 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+char		*ft_strchr(const char *s, int c)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == c)
+			return ((char *)s + i);
+		i++;
+	}
+	if (!c && s[i] == '\0')
+		return ((char *)s + i);
+	return (NULL);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strclr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/27 18:15:59 by pbie              #+#    #+#             */
+/*   Updated: 2015/12/03 16:49:07 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*This function assigns the value '\0' to all the characters in a chain that
+ * is passed to it's parameter. This sounds similar to the ft_bzero function but
+ * we are changing the value of existing characters to '\0' to clear the existing
+ * string rather than putting '\0' to placehold in a newly allocated memory zone*/
+
+void		ft_strclr(char *s)
+{
+	/*First we create an unsigned int variable i. We use unsigned int to be able
+	 *to have the unsigned int's ability to have a further positive reach than
+	 a regular int incase our string is incredibly long. i will be our counter.*/
+	unsigned int	i;
+
+	/*We then use a loop to go through each position of our string until we
+	 *reach the terminating '\0'. As we go to each space we set that character
+	 position to '\0'. This may seem like it should end the loop but because we
+	 increase the i variable after it moves to the next character that should 
+	 exist. Thus continuing the loop until the end.*/
+	i = 0;
+	while (s[i] != '\0')
+	{
+		s[i] = '\0';
+		i++;
+	}
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/24 21:23:12 by pbie              #+#    #+#             */
+/*   Updated: 2015/12/03 17:02:10 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*According to the man this function lexicographically compares the NULL
+ * terminated strings s1 and s2 that are passed into it's parameters. The
+ * function returns an integer greater than, equal to, or less than 0 depending
+ * on whether the string s1 is greater than, equal to, or less than string s2.
+ * The comparison is done using unsigned characters, so that '\200' is greater
+ * than '\0'.*/
+
+int			ft_strcmp(const char *s1, const char *s2)
+{
+	/*We start by creating our counter variable i and making it an unsigned
+	 * int in case we have a really long string. We then set it equal to 0 to
+	 * place us at the start of our string in our loop.*/
+	unsigned int	i;
+
+	i = 0;
+	/*Our while loop requres two conditions to be true for it to begin looping
+	 * and to continue looping. We want the loop to happen as long as we have
+	 * not reached the end of the string s1 AND we want the loop to happen only
+	 * so long as the character at position i in s1 is the same as the character
+	 * in postion i in s2. The second we find a difference in the string we want
+	 * to compare the difference. */
+	while (s1[i] != '\0' && s1[i] == s2[i])
+		i++;
+	/*When we have either found a non matching character or we have reached the 
+	 * end of s1 we return the difference between the character in position i in
+	 * s1 and teh character in position i in s2. NOTE: We are casting the
+	 * characters into unsigned characters just like the man explained. The
+	 * difference that is returned is based on the ascii table numerical value
+	 * of the characters.*/
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/23 17:01:11 by pbie              #+#    #+#             */
+/*   Updated: 2015/11/30 15:55:23 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+char		*ft_strcpy(char *dst, const char *src)
+{
+	size_t	i;
+
+	i = 0;
+	while (src[i] != '\0')
+	{
+		dst[i] = src[i];
+		i++;
+		dst[i] = '\0';
+	}
+	return (dst);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strdel.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/27 15:20:39 by pbie              #+#    #+#             */
+/*   Updated: 2015/12/02 22:42:34 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*This function takes in the parameter of an address to a chain of characters
+ * that should be freed and then set to NULL. We do this by running our 
+ * ft_memdel function and casting the pointer address as a void that we put 
+ * into its parameter.*/
+
+void		ft_strdel(char **as)
+{
+	ft_memdel((void **)as);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/24 15:51:07 by pbie              #+#    #+#             */
+/*   Updated: 2015/12/04 16:48:36 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+char		*ft_strdup(const char *s1)
+{
+	char	*str;
+	size_t	i;
+
+	i = 0;
+	str = (char *)malloc(sizeof(char) * ft_strlen(s1) + 1);
+	if (str == NULL)
+		return (NULL);
+	while (s1[i])
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strequ.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/27 15:55:39 by pbie              #+#    #+#             */
+/*   Updated: 2015/12/03 17:10:23 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*This function compares lexicographically the given strings s1 and s2. If the 
+ * two strings are equal the function returns 1, otherwise it returns 0. We
+ * do this using our previously made ft_strcmp function. The way to read what
+ * is being returned is by thinking, if the result of ft_strcmp returns a number
+ * greater than or less than 0 (meaning the strings are not equal) then return
+ * 0, otherwise return 1 (meaning a 0 was returned from ft_strcmp and the
+ * strings are equal).*/
+
+int			ft_strequ(char const *s1, char const *s2)
+{
+	return (ft_strcmp(s1, s2) ? 0 : 1);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_striter.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/27 18:27:28 by pbie              #+#    #+#             */
+/*   Updated: 2015/12/02 22:59:03 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*This function is made to apply the parameter function f to each character in
+ * a string passed as the parameter s. Each character is passed by the address
+  to the function f so that it can be modified if necessary.*/
+
+void		ft_striter(char *s, void (*f)(char *))
+{
+	/*We start off by creating our counter variable i and making it an unsigned
+	 * int in case we have a very large string. We then run a loop that will
+	 * continue until we reach the end of the given string. We run the function
+	 * f on each character of the string. We use the string s + the variable i
+	 * because this is an easier way to send an address of a string position.
+	 * Once the end of our string is reached the function is finished.*/
+	unsigned int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		f(s + i);
+		i++;
+	}
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/27 18:34:01 by pbie              #+#    #+#             */
+/*   Updated: 2015/12/02 23:37:54 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*This function applies the parameter function f to each character of a string
+ * also passed in it's parameter at at precisely that character's index string
+ * position. Each character that is passed into the function f is modified if
+ * necessary.*/
+
+void		ft_striteri(char *s, void (*f)(unsigned int, char *))
+{
+	/*We start by creating our counter variable i as an unsigned variable to 
+	 * compensate for the possibilty of a long string.*/
+	unsigned int	i;
+
+	/*We then start at the beginning of our string and work our way until the
+	 * end, applying the function f to each character. When our loop reaches
+	 * the of the string the function is finished.*/
+	i = 0;
+	while (s[i] != '\0')
+	{
+		f(i, s + i);
+		i++;
+	}
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/27 17:41:51 by pbie              #+#    #+#             */
+/*   Updated: 2015/12/04 15:48:37 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*This function allocates memory and returns a new string terminated by a '\0'
+ * which is the result of a concatenation of the parameters s1 and s2. If the
+ * allocation fails the function will return NULL.*/
+
+char		*ft_strjoin(char const *s1, char const *s2)
+{
+	/*We begin by declaring three variables. The first two will be counters we
+	 * will use to move through our strings. The third is the new string that
+	 * we will be allocating memory to in order to return the concatenation of
+	 * our parameter strings.*/
+	int		i;
+	int		j;
+	char	*str;
+	/*We set both of the counter variables to 0 since we will want both
+	 * counters to start at the beginning of their respective strings. We then
+	 * allocate memory using the malloc function with a combination of using
+	 * our previously made ft_strlen functions. We use the ft_strlen function
+	 * on both the parameter strings to figure out the full length for a 
+	 * concatenation and we add 1 to this added length to make sure we can
+	 * add a terminating '\0'. If the allocation failed we will return NULL.*/
+	i = 0;
+	j = 0;
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (str == NULL)
+		return (NULL);
+	/*If the allocation worked we begin our concatenation of our given strings.
+	 * We start with s1 with a standard string loop saying that as long as we
+	 * have not reached the end of the string, continue. We place the index
+	 * of both our new string str and our parameter s1 at i which at this 
+	 * moment is 0. We then run through the length of s1 placing each character
+	 * in s1 into str. Once this has finished we continue to the next loop.*/
+	while (s1[i] != '\0')
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	/*This next loop is exactly the same as the previous loop except you must
+	 * take note of our use of the counter variable j. j is currently equal to 
+	 * 0 at this point in our function. For our new string str we set the index
+	 * equal to the previous counter i plus our new counter j. This keeps us at
+	 * the index position we ended on when our previous loop finished since it
+	 * will be the value i was at the end of the previous loop plus j's current
+	 * value of 0. We use j to set the index of our string s2 and let the loop
+	 * go until we have reached the end of s2. Once the end of s2 has been
+	 * reached we add a terminating '\0' to the end of our fresh string and
+	 * return the new string which is a fresh concatenation of our parameters.*/
+	while (s2[j] != '\0')
+	{
+		str[i + j] = s2[j];
+		j++;
+	}
+	str[i + j] = '\0';
+	return (str);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/24 16:40:17 by pbie              #+#    #+#             */
+/*   Updated: 2015/11/30 22:17:22 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
+{
+	size_t	j;
+	size_t	k;
+
+	j = 0;
+	k = 0;
+	while (dst[j] && j < size)
+		j++;
+	while ((src[k]) && ((j + k + 1) < size))
+	{
+		dst[j + k] = src[k];
+		k++;
+	}
+	if (j != size)
+		dst[j + k] = '\0';
+	return (j + ft_strlen(src));
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   strlen.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/23 15:57:27 by pbie              #+#    #+#             */
+/*   Updated: 2015/11/30 16:46:18 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+size_t		ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strmap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/27 18:40:57 by pbie              #+#    #+#             */
+/*   Updated: 2015/12/02 23:47:13 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*This functin applies the given function f to each character of the given
+ * string in order to create a new string that is the result of have function
+ * f run on string s. It will return a 'fresh' copy of the modified string*/
+
+char		*ft_strmap(char const *s, char (*f)(char))
+{
+	/*We start by creating two variable. An unsigned int counter to move us
+	 * through our string and char variable for our string that is to be 
+	 * returned.*/
+	unsigned int	i;
+	char			*str;
+
+	/*Next we allocate the memory necessary to make a copy of the modified 
+	 * string we want to return. We use our ft_strlen function on the given
+	 * string and make sure to add 1 to it to compensate for the terminating 
+	 * '\0'. If the allocation fails we return NULL. Otherwise we continue.*/
+	i = 0;
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s)) + 1);
+	if (str == NULL)
+		return (NULL);
+	/*We now go through our string s and apply the function f to each of it's
+	 * characters. We set the result of this into the corresponding position in
+	 * our empty string. Once we reach the end of our parameter string we exit
+	 * the loop and make sure to add a terminating '\0' to the end of our newly
+	 * filled string. We then return our new string.*/
+	while (s[i] != '\0')
+	{
+		str[i] = f(s[i]);
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/27 15:32:15 by pbie              #+#    #+#             */
+/*   Updated: 2015/12/02 23:49:18 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+	/*This function is exactly the same as ft_strmap except that when we run
+	 * our given function f on the character we also pass to f the specific
+	 * index of our character in the given string. Review ft_strmap in order
+	 * to understand how this function works.*/
+
+char		*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+{
+	unsigned int	i;
+	char			*str;
+
+	i = 0;
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s)) + 1);
+	if (str == NULL)
+		return (NULL);
+	while (s[i] != '\0')
+	{
+		str[i] = f(i, s[i]);
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/23 19:34:55 by pbie              #+#    #+#             */
+/*   Updated: 2015/11/24 18:09:05 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+char		*ft_strncat(char *s1, const char *s2, size_t n)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	while (s1[i] != '\0')
+		i++;
+	while (s2[j] != '\0' && j < n)
+	{
+		s1[i + j] = s2[j];
+		j++;
+	}
+	s1[i + j] = '\0';
+	return (s1);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/24 21:34:25 by pbie              #+#    #+#             */
+/*   Updated: 2015/12/03 17:55:09 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*Similar to ft_strcmp the man says this function lexicographically compares the
+ * NULL terminated strings s1 and s2 that are passed into the functions
+ * parameters. The function returns an integer greater than, equal to, or less
+ * than 0 depending on whether the string s1 is greater than, equal to, or less
+ * than string s2. The comparison is again done using unsigned characters, so
+ * that '\200' is greater than '\0'. The difference though, between ft_strncmp
+ * and ft_strcmp is that we will only search string s1 to it's nth position. The
+ * n is given in the parameters.*/
+
+int			ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	/*We first declare our counter variable i as a size_t. We do this because
+	 * the parameter we are taking in for n is a size_t. We will be needing
+	 * to compare our give n value with our i value so they must be the same.*/
+	size_t	i;
+	/*We set i to 0 to place us at the beginning of our string when we start our
+	 * loop. We then check to see if our given n is equal to 0. If it is we
+	 * return 0. If not we begin our loop which requires three conditions to be
+	 * true in order to happen. We want our loop to happen as long as our string
+	 * has not reached it's end AND while the character at position i in s1 is
+	 * the same as the character at position i in s2 AND while our counter 
+	 * variable i is less than n - 1. We subtract 1 from the given n because
+	 * a size_t variable is often used for a memory allocation function and will
+	 * be the full size of the string. We subtract 1 to compensate for the fact
+	 * that the given size_t is not supposed to be given as 0. If we find a 
+	 * difference in characters, or our i variable becomes the same size as n
+	 * minus 1, or we reach the end of s1, we finish the loop. We then return
+	 * the difference between the current character in s1 at position i from the
+	 * current character in s2 at position i. NOTE: We cast the characters as
+	 * unsigned characters just like the man explained.*/
+	i = 0;
+	if (n == 0)
+		return (0);
+	while (s1[i] != '\0' && s1[i] == s2[i] && i < n - 1)
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/23 17:10:44 by pbie              #+#    #+#             */
+/*   Updated: 2015/11/27 16:36:39 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+char		*ft_strncpy(char *dst, const char *src, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	while (src[i] && i < n)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	while (i < n)
+	{
+		dst[i] = '\0';
+		i++;
+	}
+	return (dst);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strnequ.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/27 16:10:23 by pbie              #+#    #+#             */
+/*   Updated: 2015/12/03 18:03:31 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+int			ft_strnequ(char const *s1, char const *s2, size_t n)
+{
+	return (ft_strncmp(s1, s2, n) ? 0 : 1);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strnew.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/27 15:17:42 by pbie              #+#    #+#             */
+/*   Updated: 2015/12/02 22:38:36 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*This function allocates memory and returns a 'fresh' string that ends with 
+ *'\0'. Each character in the string is set to '\0' if the allocation fails the
+ function returns NULL. To do this we simply use our ft_memalloc function with
+ the size parameter given to our function. We make sure cast it as a char string
+ because that is what we want to return and we have to add + 1 to our size_t
+ to compensate for the terminating '\0'. NOTE: We are able to set each character 
+ in the string to '\0' because our ft_memalloc uses our ft_bzero function*/
+char		*ft_strnew(size_t size)
+{
+	return ((char *)ft_memalloc(size + 1));
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/23 18:55:03 by pbie              #+#    #+#             */
+/*   Updated: 2015/11/30 21:45:41 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+char		*ft_strnstr(const char *s1, const char *s2, size_t n)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	while (i < n && s1[i] != '\0')
+	{
+		j = 0;
+		while (i + j < n && s1[i + j] == s2[j] && s2[j] != '\0')
+			j++;
+		if (s2[j] == '\0')
+			return ((char *)s1 + i);
+		i++;
+	}
+	return (NULL);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/24 20:50:08 by pbie              #+#    #+#             */
+/*   Updated: 2015/11/30 22:07:13 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+char		*ft_strrchr(const char *s, int c)
+{
+	int		i;
+
+	i = ft_strlen(s);
+	if (c == 0)
+		return ((char *)s + i);
+	while (i >= 0)
+	{
+		if (s[i] == c)
+			return ((char *)s + i);
+		i--;
+	}
+	return (NULL);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strsplit.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/27 16:21:25 by pbie              #+#    #+#             */
+/*   Updated: 2015/12/05 19:03:30 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*This function will allocate memory and return a 'fresh' table of strings (all
+ * terminated by a '\0', the table as well) as a result of the splitting of
+ * the given string by the given character c. If memory allocation fails at
+ * any point the function will return NULL. And example of this function is
+ * ft_strsplit("*hello*fellow***students*", '*'). This should return a table
+ * that splits the string int ["hello", "fellow", "students"]. This function
+ * must be done in three parts. We will start at the ft_strsplit function at
+ * the bottom. We put ft_strsplit at the end of our code because in order to 
+ * use other functions we make specifically for it we have to make sure we have
+ * them made before we get to our actual function.*/
+
+/*The first function we have is a word counting function. We make this because
+ * we will need to figure out how many strings we will be placing into our 
+ * table that's to be returned from the ft_strsplit function. We want this
+ * for when we allocate memory for the table.*/
+static int			ft_cntwrd(char const *s, char c)
+{
+	/*We start by creating two variables. The first is an unsigned int i which
+	 * we will use to move through the string that was given to ft_strsplit.
+	 * We use unsigned in the event we get a ridiculously long string. We also
+	 * make a counter variable we will be using to count the words in the
+	 * string and then we will return it. NOTE: This function returns a static
+	 * int. A static variable as a way of getting around not using global
+	 * variables. A static variable keeps its value between invocations. We 
+	 * use this for cases where a function needs to keep some state between
+	 * invocations. We set both of our variables to 0 and begin our function.*/
+	unsigned int	i;
+	int				cntr;
+
+	i = 0;
+	cntr = 0;
+	/*We go into our while loop and have it loop so long as we have not reached
+	 * the end of the given string. Inside our loop we have another while loop
+	 * that is saying so long as the index position we are in has the same
+	 * character as our c parameter then we want to move past it. This is the
+	 * same c character that the ft_strsplit function will be splitting the
+	 * string by. So we want to skip over that character until we find our
+	 * first real word. If, when our while loop has finished passing over
+	 * c characters, we have not reached the end of the given string then we
+	 * want to increase our word counter. We know that we have something that
+	 * is not the character held by variable c and we want to split that from
+	 * the string. We then go to another while loop that will pass over all of
+	 * the characters in our word until we find another instance of the 
+	 * character held by variable c. If we find one and we have not reached the
+	 * end of our string we begin the loop again and continue until we have
+	 * reached the end, counting all of the words along the way. We then
+	 * return the cntr variable which will tell us how many words exist in our
+	 * string.*/
+	while (s[i])
+	{
+		while (s[i] == c)
+			i++;
+		if (s[i] != '\0')
+			cntr++;
+		while (s[i] && (s[i] != c))
+			i++;
+	}
+	return (cntr);
+}
+/*This next function is a variation of the ft_strdup function we have
+ * previously made. According to the man the ft_strdup function allocates
+ * sufficient memory for a copy of the given string, does the copy, and returns
+ * a pointer to it. The ft_strndup function copies at most n (our size_t
+ * parameter) characters from the given string, always NULL terminating the
+ * copied string.*/
+static char			*ft_strndup(const char *s, size_t n)
+{
+	/*We start by creating a string variable that we will be allocating memory
+	 * to and that we will be returning as the result of this function. We 
+	 * allocate the memory for this string by using this function's parameter
+	 * of n. We get this parameter from our ft_strsplit function. It is the 
+	 * length of one of the words that we a splitting into a table. We add 1 to
+	 * this in the malloc function to ensure space for a terminating '\0'. We
+	 * then check to see if the memory allocation failed. If it did we will
+	 * return NULL. If the allocation succeeded then we want to place our word
+	 * into our fresh string str. We do this by using our previously made 
+	 * ft_strncpy function. We give ft_strncpy our memory allocated 'fresh'
+	 * string, the parameter string s (which is taken from ft_strsplit but has
+	 * been put in the ft_strndup function at the index the word we want to 
+	 * place into str will start from) and the size_t parameter n. We then make
+	 * sure to add a terminating character to the end of our fresh string and
+	 * then return it. */
+	char			*str;
+
+	str = (char *)malloc(sizeof(char) * n + 1);
+	if (str == NULL)
+		return (NULL);
+	str = ft_strncpy(str, s, n);
+	str[n] = '\0';
+	return (str);
+}
+/*With the two previous functions made we are now ready to begin our real
+ * function, ft_strsplit*/
+char				**ft_strsplit(char const *s, char c)
+{
+	/*We start by creating three counter variables. We will use these three
+	 * variables to pinpoint index positions inside our parameter string s. We
+	 * also create a char variable **tab. This variable is for our table that
+	 * will hold our split strings. We set the variables i and k to 0 and well
+	 * then allocate memory for our table. This is where we use our ft_cntwrd
+	 * function above, to figure out how much space we need to allocate for our
+	 * table. If the allocation fails we return a NULL.*/
+	int				i;
+	int				j;
+	int				k;
+	char			**tab;
+
+	i = 0;
+	k = 0;
+	tab = (char **)malloc(sizeof(char *) * (ft_cntwrd(s, c)) + 1);
+	if (tab == NULL)
+		return (NULL);
+	/*We now go into our loop to split our given string. Our main loop will
+	 * continue so long as we have not reached the end of our parameter string.
+	 * Inside we have another loop to pass over all of the parameter c
+	 * characters that exist. This will stop when we reach our first not c 
+	 * character. We then set our variable j equal to the value of i at This
+	 * point in our function. j will be used to point to the starting index
+	 * position of our first word inside our string s. We then continue moving
+	 * through string s so long as we don't come across our parameter c
+	 * character. Once we do we move to our if statement. If i is greater than
+	 * j, which it should be if there is a word we want, we will then place
+	 * that word into our table index position 0 (which is currently the value
+	 * of k). We do this using the ft_strndup function from above and we give it
+	 * two parameters; Our paramter string s (but at the index position of j,
+	 * the beginning of the word we want) and the size/length of the word which
+	 * we find by subtracting the value of j from the value of i (the start and
+	 * end index positions of our word). We then increment k to move to the
+	 * next position in our table. We repeat the main while loop until we reach
+	 * the end of our parameter string s. We finish by adding a terminating
+	 * NULL to our table tab. We then return our finished table.*/
+	while (s[i])
+	{
+		while (s[i] == c)
+			i++;
+		j = i;
+		while (s[i] && s[i] != c)
+			i++;
+		if (i > j)
+		{
+			tab[k] = ft_strndup(s + j, i - j);
+			k++;
+		}
+	}
+	tab[k] = NULL;
+	return (tab);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/23 17:25:37 by pbie              #+#    #+#             */
+/*   Updated: 2015/11/30 21:11:40 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+char		*ft_strstr(const char *s1, const char *s2)
+{
+	unsigned int	i;
+	unsigned int	j;
+
+	i = 0;
+	if (s1[0] == '\0' && s2[0] == '\0')
+		return ((char *)s1);
+	while (s1[i] != '\0')
+	{
+		j = 0;
+		while (s2[j] != '\0' && s1[i + j] == s2[j])
+			j++;
+		if (s2[j] == '\0')
+			return ((char *)s1 + i);
+		i++;
+	}
+	return (NULL);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/27 18:51:57 by pbie              #+#    #+#             */
+/*   Updated: 2015/12/04 15:33:21 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*This function allocates memory and returns a new copy of a portion of the
+ * string passed in the parameter. The portion begins at the index parameter
+ * of start and will have the length of the parameter len. If start and len do
+ * not designate a portion of a valid string the behavior is undefined. If the 
+ * memory allocation fails the function will return NULL.*/
+
+char		*ft_strsub(char const *s, unsigned int start, size_t len)
+{
+	/*We begin by declaring two variables. The first, i, will be our counter
+	 * and is an unsigned int to compensate for the possibility of a longer
+	 * string than an int could count through. We also delcare a char pointer
+	 * str which will hold our fresh string that we will be returning.*/
+	unsigned int	i;
+	char			*str;
+
+	/*We set our counter at 0 because we will be comparing it to len in our
+	 * loop condition and we are assuming that len will at least be 1. We then
+	 * allocate memory for our future string by using malloc. NOTE: that we are
+	 * using the len variable for the size of the memory allocation and adding
+	 * 1 to it in order to make a space to terminate our new string with '\0'
+	 * because malloc takes the literal spacing needed and strings begin at
+	 * position 0. We then check to make sure that the allocation worked. If
+	 * it failed we return NULL. If not we continue to our loop.*/
+	i = 0;
+	str = (char *)malloc(sizeof(char) * len + 1);
+	if (str == NULL)
+		return (NULL);
+	/*We begin our loop by setting a condition for the loop to last as long as
+	 * our counter i is less than the given len parameter. As long as this is
+	 * true we will then take the parameter string starting at the index
+	 * position given by the start parameter and we will add the current value
+	 * of our counter i to it in order to move along the parameter string
+	 * and place the corresponding character into the new string. NOTE: By
+	 * using i to move through our parameter string we can start at position 0
+	 * in our new string and place the character at our desired start index
+	 * of string s into the allocated space of our new string. Once the loop
+	 * has finished we will add a terminating '\0' to the new string and then
+	 * return it..*/
+	while (i < len)
+	{
+		str[i] = s[start + i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/27 19:00:25 by pbie              #+#    #+#             */
+/*   Updated: 2015/12/04 18:40:26 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+/*This function allocates memory and returns a copy of the string passed in the
+ * parameter but without any kind of blank spaces at the start or the end of
+ * the string. This function considers blank spaces to be the characters ' ',
+ * a standard space, '\n', a new line, and '\t', which is a tabulation space.
+ * If there are no spaces at the beginning and end of the parameter string s
+ * the function returns a copy of s. If the allocation of memory fails the
+ * function returns NULL.*/
+
+char		*ft_strtrim(char const *s)
+{
+	/*We start the function by delcaring four variables. The first three will
+	 * be used as index counting variables. Once again we use unsigned in case
+	 * we are dealing with a ridiculously long string. We also declare a new
+	 * string str which is going to hold and return a copy of our parameter
+	 * string.*/
+	unsigned int	i;
+	unsigned int	j;
+	unsigned int	k;
+	char			*str;
+	/*We set our variables i and k to 0. i will be our counter for the first
+	 * part of our string looking for any spacing at the beginning. The 
+	 * variable k we will get to later. For now just set it to 0. We then start
+	 * a loop that will happen so long as the current index position of our
+	 * parameter string is a space of some sort. We then follow this with an
+	 * if statement saying if after the first while has finished and we are
+	 * at the end of the string s already, or if there were no spaces at all
+	 * and the string is right away terminated by a '\0' we are going to return
+	 * a string that is NULL. We do this by using our previously made
+	 * ft_memalloc function to create a allocated memory space worth two char 
+	 * values that will be our destination string for our ft_strcpy function
+	 * and a "" that will fill our string with a NULL space. The ft_strcpy 
+	 * function will create the NULL string to return.*/
+	i = 0;
+	k = 0;
+	while (s[i] == ' ' || s[i] == '\n' || s[i] == '\t')
+		i++;
+	if (s[i] == '\0')
+		return (ft_strcpy(ft_memalloc(sizeof(char) * 2), ""));
+	/*Below is where we will search for any sort of spacing at the end of our
+	 * parameter string s. We start by setting our counter j to the length
+	 * of s by using our ft_strlen function and then subtracting one from the
+	 * result. We subtract the 1 to compensate for a terminating '\0' because
+	 * we will be decrementing from the end of string s this time. Our while
+	 * loop follwing our setting of value to j starts at the last index 
+	 * position of string s and moves backwards through the string. Once a non
+	 * spacing character is found the loop stops. Once this loop is done we are
+	 * ready to allocate memory for a fresh string.*/
+	j = ft_strlen(s) - 1;
+	while (s[j] == ' ' || s[j] == '\n' || s[j] == '\t')
+		j--;
+	/*We do a standard memory allocation for our fresh string but notice what
+	 * we are doing to know the size of the string. We are subtracting i, which
+	 * found our spacing at the beginning of the given string, from j, which 
+	 * found our spacing at the end of the string, and then we are adding 2
+	 * to that result. We do this because of how the counters work. They will
+	 * place their index position on the character that stopped their
+	 * incrementation and their decrementation. You add the 2 to bring you back
+	 * to the length of the string you will be returning plus the space for the
+	 * terminating '\0'. We then check to make sure our memory allocation
+	 * worked. If not we return NULL.*/
+	str = (char *)malloc(sizeof(char) * (j - i + 2));
+	if (str == NULL)
+		return (NULL);
+	/*We now begin our final loop which will place a trimmed version of the
+	 * string s into our fresh str string. We do a loop while k, which we
+	 * set earlier to 0, is less than j minus i plus 1, which we do to make
+	 * sure we do the full length of the portion that we want of s. Inside 
+	 * the loop we take the index position in s that is the start of our trim
+	 * and add k to that index so we will increment from that position. We then
+	 * place the corresponding character into our new string. We run the loop
+	 * until we reach the end of the portion of s that we want and then we exit
+	 * the loop. We then add a terminating '\0' and return our trimmed string.*/
+	while (k < j - i + 1)
+	{
+		str[k] = s[i + k];
+		k++;
+	}
+	str[k] = '\0';
+	return (str);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/24 19:43:30 by pbie              #+#    #+#             */
+/*   Updated: 2015/11/30 17:06:20 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+int			ft_tolower(int c)
+{
+	if (c >= 'A' && c <= 'Z')
+		c += 32;
+	return (c);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/11/24 19:37:34 by pbie              #+#    #+#             */
+/*   Updated: 2015/11/30 17:04:18 by pbie             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+int			ft_toupper(int c)
+{
+	if (c >= 'a' && c <= 'z')
+		c -= 32;
+	return (c);
+}

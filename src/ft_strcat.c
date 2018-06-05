@@ -1,18 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pbie <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/21 14:32:22 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/06/05 07:58:32 by kaysiz           ###   ########.fr       */
+/*   Created: 2015/11/23 19:17:48 by pbie              #+#    #+#             */
+/*   Updated: 2015/11/23 19:31:49 by pbie             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr(char const *s)
+char		*ft_strcat(char *s1, const char *s2)
 {
-    write(1, s, ft_strlen(s));
+	char	*dst;
+	char	*src;
+
+	dst = s1;
+	src = (char *)s2;
+	while (*dst)
+		dst++;
+	while (*src)
+	{
+		*dst = *src;
+		dst++;
+		src++;
+	}
+	*dst = '\0';
+	return (s1);
 }

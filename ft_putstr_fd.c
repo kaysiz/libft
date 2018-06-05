@@ -6,7 +6,7 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 14:53:18 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/06/04 16:29:20 by ksiziva          ###   ########.fr       */
+/*   Updated: 2018/06/05 07:59:24 by kaysiz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,5 @@
 
 void	ft_putstr_fd(char const *s, int fd)
 {
-	int index;
-
-	index = 0;
-	if (s != NULL)
-	{
-		while (s[index] != '\0')
-		{
-			write(fd, &s[index], 1);
-			index++;
-		}
-	}
+    write(fd, s, ft_strlen(s));
 }
