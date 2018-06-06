@@ -6,22 +6,16 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 12:32:03 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/05/29 11:03:31 by ksiziva          ###   ########.fr       */
+/*   Updated: 2018/06/06 16:07:06 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_strcmp(const char *str1, const char *str2)
 {
-	int i;
+	unsigned int i;
 
 	i = 0;
-	while (str1[i] && str2[i])
-	{
-		if (str1[i] > str2[i])
-			return (1);
-		else if (str1[i] < str2[i])
-			return (-1);
+	while (str1[i] != '\0' && str1[i] == str2[i])
 		i++;
-	}
-	return (0);
+	return ((unsigned char)str1[i] - (unsigned char)str2[i]);
 }

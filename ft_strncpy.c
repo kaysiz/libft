@@ -6,9 +6,11 @@
 /*   By: kaysiz <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 01:52:06 by kaysiz            #+#    #+#             */
-/*   Updated: 2018/05/24 01:53:18 by kaysiz           ###   ########.fr       */
+/*   Updated: 2018/06/05 12:35:46 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 char	*ft_strncpy(char *dest, const char *src, size_t n)
 {

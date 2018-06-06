@@ -6,7 +6,7 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 08:40:49 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/05/29 10:51:01 by ksiziva          ###   ########.fr       */
+/*   Updated: 2018/06/05 12:39:34 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strstr(const char *s1, const char *s2)
 	while (s1[i] != '\0')
 	{
 		j = 0;
-		while (s2[j] != '\0' && s[i + j] == s2[j])
+		while (s2[j] != '\0' && s1[i + j] == s2[j])
 			j++;
 		if (s2[j] == '\0')
 			return ((char *)s1 + i);
