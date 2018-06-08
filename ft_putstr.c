@@ -6,7 +6,7 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 14:32:22 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/06/05 07:58:32 by kaysiz           ###   ########.fr       */
+/*   Updated: 2018/06/08 16:16:37 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 void	ft_putstr(char const *s)
 {
-    write(1, s, ft_strlen(s));
+	if (s != NULL)
+    	write(1, s, ft_strlen(s));
 }

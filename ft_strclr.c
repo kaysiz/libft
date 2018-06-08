@@ -6,7 +6,7 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 14:32:10 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/05/31 16:24:26 by ksiziva          ###   ########.fr       */
+/*   Updated: 2018/06/08 16:15:28 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 void	ft_strclr(char *s)
 {
-	ft_memset(s, '\0', ft_strlen(s));
+	if (s != NULL)
+		ft_memset(s, '\0', ft_strlen(s));
 }

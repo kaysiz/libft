@@ -6,14 +6,14 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 08:56:50 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/05/22 09:26:28 by ksiziva          ###   ########.fr       */
+/*   Updated: 2018/06/08 10:16:11 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_islower(int arg)
 {
-	if (arg >= 65 && arg <= 90)
-		return (arg);
+	if (arg >= 'a' && arg <= 'z')
+		return (1);
 	else
 		return (0);
 }

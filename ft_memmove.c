@@ -6,7 +6,7 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 15:00:40 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/06/06 16:18:41 by ksiziva          ###   ########.fr       */
+/*   Updated: 2018/06/08 12:00:13 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,26 @@
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	unsigned char	*s1;
-	unsigned char	*s2;
-	
-	s1 = (unsigned char *)src;
-	s2 = (unsigned char *)dest;
-	if (s2 > s1)
-		ft_memcpy(s2, s1, n);
-	else
+	char	*s;
+	char	*d;
+		
+	s = (char *)src;
+	d = (char *)dest;
+	/* if src and dest are equal return dest*/
+	if (s == d)
+		return (dest);
+	/* if dest is greater than src, copy from the back*/
+	if(d > s)
 	{
-		while (n > 0)
+		s = s + n - 1;
+		d = d + n - 1;
+		while (n--)
 		{
-			s2[n-1] = s2[n-1];
-			n--;
+			*d-- = *s--;
 		}
 	}
+	/* else just use memcpy as there are no overlaps*/
+	else
+		ft_memcpy(d, s, n);
 	return (dest);
 }

@@ -42,7 +42,15 @@ SRC = ft_atoi.c \
 	  ft_strstr.c \
 	  ft_tolower.c \
 	  ft_toupper.c \
-      ft_strncmp.c		 
+      ft_strncmp.c \
+	  ft_memalloc.c \
+	  ft_striter.c \
+	  ft_strnew.c \
+	  ft_striteri.c \
+      ft_strmap.c \
+	  ft_strmapi.c \
+      ft_strequ.c \
+      ft_strnequ.c	  
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
