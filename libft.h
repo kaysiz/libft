@@ -6,7 +6,7 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 08:51:51 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/06/08 17:49:20 by ksiziva          ###   ########.fr       */
+/*   Updated: 2018/06/09 12:07:28 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include <unistd.h>
 # include <string.h>
 
+char	*ft_strtrim(char const *s);
+char	*ft_strsub(char const *s, unsigned int start, size_t len);
+void	ft_strdel(char **as);
 char	*ft_strjoin(char const *s1, char const *s2);
 int	ft_isspace(int c);
 int	ft_isalnum(int c);
@@ -70,4 +73,5 @@ char	*ft_strmap(char const *s, char (*f)(char));
 char	*ft_strmapi(char const *s, char (*f) (unsigned int, char));
 int	ft_strequ(char const *s1, char const *s2);
 int	ft_strnequ(char const *s1, char const *s2, size_t n);
+void	ft_memdel(void **ap);
 #endif

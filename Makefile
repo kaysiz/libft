@@ -50,7 +50,11 @@ SRC = ft_atoi.c \
       ft_strmap.c \
 	  ft_strmapi.c \
       ft_strequ.c \
-      ft_strnequ.c	  
+      ft_strnequ.c \
+      ft_memdel.c \
+      ft_strdel.c \
+      ft_strsub.c \
+      ft_strtrim.c	  
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
