@@ -6,7 +6,7 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 08:51:51 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/06/09 12:07:28 by ksiziva          ###   ########.fr       */
+/*   Updated: 2018/06/14 13:36:27 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,6 @@ char	*ft_strmapi(char const *s, char (*f) (unsigned int, char));
 int	ft_strequ(char const *s1, char const *s2);
 int	ft_strnequ(char const *s1, char const *s2, size_t n);
 void	ft_memdel(void **ap);
+char	*ft_strndup(const char *str, size_t n);
+char**ft_strsplit(char const *s, char d);
 #endif

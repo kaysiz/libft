@@ -6,7 +6,7 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 12:10:35 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/06/13 17:32:07 by ksiziva          ###   ########.fr       */
+/*   Updated: 2018/06/14 16:24:14 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,17 @@ static int	count_words(char *s, char d)
 
 	i = 0;
 	count = 0;
-	if( s != NULL)
+	while (s[i])
 	{
-		while (s[i])
-		{
-			while (s[i] == d && s[i] != '\0')
-				i++;
-			if (s[i] != d && s[i] != '\0')
-				count++;
-			while (s[i] != d && s[i] != '\0')
-				i++;
+		while (s[i] == d && s[i] != '\0')
+			i++;
+		if (s[i] != d && s[i] != '\0')
+			count++;
+		while (s[i] != d && s[i] != '\0')
+			i++;
 		
-		}
-		return (count);
 	}
-	return (NULL);
+	return (count);
 }
 
 char	**ft_strsplit(char const *s, char d)
@@ -45,11 +41,22 @@ char	**ft_strsplit(char const *s, char d)
 
 	i = 0;
 	j = 0;
-	res = (char **)malloc(sizeof(char *) * (count_words(s, d) + 1));
+	res = (char **)malloc(sizeof(char *) * (count_words((char *)s, d) + 1));
 	if (res == NULL)
 		return (NULL);
 	while (s[i])
 	{
-
+		while (s[i] == d)
+			i++;
+		k = i;
+		while (s[i] && s[i] != d)
+			i++;
+		if (i > j)
+		{
+			res[j] = ft_strndup(s + j, i - j);
+			j++;
+		}
 	}
+	res[j] = NULL;
+	return (res);
 }
