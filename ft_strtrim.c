@@ -6,15 +6,15 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 09:42:43 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/06/09 12:08:30 by ksiziva          ###   ########.fr       */
+/*   Updated: 2018/06/15 16:31:48 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isspace2(int c)
+static int			ft_isspace2(int c)
 {
-	char	*space;
+	char			*space;
 
 	space = "\t\n ";
 	while (*space)
@@ -26,12 +26,12 @@ int	ft_isspace2(int c)
 	return (0);
 }
 
-char	*ft_strtrim(char const *s)
+char				*ft_strtrim(char const *s)
 {
 	unsigned int	i;
 	unsigned int	j;
 	unsigned int	k;
-	char	*res;
+	char			*res;
 
 	i = 0;
 	j = 0;
@@ -39,7 +39,7 @@ char	*ft_strtrim(char const *s)
 	while (ft_isspace2(s[i]))
 		i++;
 	if (s[i] == '\0')
-		return (ft_strcpy(ft_memalloc(sizeof(char *) *2),""));
+		return (ft_strcpy(ft_memalloc(sizeof(char *) * 2), ""));
 	j = ft_strlen(s) - 1;
 	while (ft_isspace2(s[j]))
 		j--;

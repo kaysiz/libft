@@ -6,7 +6,7 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 12:10:35 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/06/14 22:43:25 by kaysiz           ###   ########.fr       */
+/*   Updated: 2018/06/15 16:23:54 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,16 @@ static int	count_words(char *s, char d)
 			count++;
 		while (s[i] != d && s[i] != '\0')
 			i++;
-		
 	}
 	return (count);
 }
 
-char	**ft_strsplit(char const *s, char d)
+char		**ft_strsplit(char const *s, char d)
 {
 	size_t	i;
 	size_t	j;
 	size_t	k;
-	char **res;
+	char	**res;
 
 	i = 0;
 	j = 0;

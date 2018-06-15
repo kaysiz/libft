@@ -6,17 +6,17 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 08:49:08 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/06/06 15:21:35 by ksiziva          ###   ########.fr       */
+/*   Updated: 2018/06/15 14:38:49 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s)
+char		*ft_strdup(const char *s)
 {
 	char	*dest;
 	size_t	len;
-	int	i;
+	int		i;
 
 	i = 0;
 	len = ft_strlen(s);
