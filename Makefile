@@ -9,7 +9,8 @@ SRC = ft_atoi.c \
 	  ft_isascii.c \
 	  ft_isdigit.c \
 	  ft_isprint.c \
-	  ft_islower.c \
+	  ft_itoa.c \
+      ft_islower.c \
 	  ft_isspace.c \
 	  ft_isupper.c \
 	  ft_memccpy.c \

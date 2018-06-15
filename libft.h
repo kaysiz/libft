@@ -6,7 +6,7 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 08:51:51 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/06/14 13:36:27 by ksiziva          ###   ########.fr       */
+/*   Updated: 2018/06/14 22:37:23 by kaysiz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <string.h>
 
+char    *ft_itoa(int n);
 char	*ft_strtrim(char const *s);
 char	*ft_strsub(char const *s, unsigned int start, size_t len);
 void	ft_strdel(char **as);
