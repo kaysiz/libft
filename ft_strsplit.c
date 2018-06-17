@@ -6,7 +6,7 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 12:10:35 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/06/17 06:20:33 by kaysiz           ###   ########.fr       */
+/*   Updated: 2018/06/17 17:39:21 by ksiziva          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,26 +40,21 @@ char		**ft_strsplit(char const *s, char d)
 
 	i = 0;
 	j = 0;
-    if (s && d)
-    {
-	    res = (char **)malloc(sizeof(char *) * (count_words((char *)s, d) + 1));
-	    if (res == NULL)
-		    return (NULL);
-	    while (s[i])
-	    {
-		    while (s[i] == d)
-			    i++;
-		    k = i;
-		    while (s[i] && s[i] != d)
-			    i++;
-		    if (i > k)
-		    {
-			    res[j] = ft_strndup(s + k, i - k);
-			    j++;
-		    }
-	    }
-	    res[j] = NULL;
-	    return (res);
-    }
-    return (NULL);
+	if (s == NULL)
+		return (NULL);
+	res = (char **)malloc(sizeof(char *) * (count_words((char *)s, d) + 1));
+	if (res == NULL)
+		return (NULL);
+	while (s[i])
+	{
+		while (s[i] == d)
+			i++;
+		k = i;
+		while (s[i] && s[i] != d)
+			i++;
+		if (i > k)
+			res[j++] = ft_strsub(s, k, i - k);
+	}
+	res[j] = NULL;
+	return (res);
 }
