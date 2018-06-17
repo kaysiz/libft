@@ -6,7 +6,7 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 08:51:51 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/06/15 16:34:34 by ksiziva          ###   ########.fr       */
+/*   Updated: 2018/06/16 21:01:48 by kaysiz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_strdel(char **as);
 char	*ft_strjoin(char const *s1, char const *s2);
 int		ft_isspace(int c);
 int		ft_isalnum(int c);
-void	ft_bzero(void *s, int n);
+void	ft_bzero(void *s, size_t n);
 int		ft_atoi(const char *str);
 int		ft_isascii(int c);
 int		ft_isdigit(int c);
@@ -52,7 +52,6 @@ char	*ft_strcpy(char *dest, const char *src);
 char	*ft_strjoin(char const *s1, char const *s2);
 void	ft_putnbr(int n);
 void	ft_putnbr_fd(int n, int fd);
-char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlcat(char *dest, const char *src, size_t n);
 size_t	ft_strlen(const char *str);
 char	*ft_strncat(char *dest, const char *src, size_t n);
@@ -68,7 +67,6 @@ char	*ft_strdup(const char *s);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	*ft_memalloc(size_t n);
 void	ft_striter(char *s, void (*f)(char *));
-char	*ft_strnew(size_t n);
 void	ft_striteri(char *s, void (*f) (unsigned int, char *));
 char	*ft_strmap(char const *s, char (*f)(char));
 char	*ft_strmapi(char const *s, char (*f) (unsigned int, char));

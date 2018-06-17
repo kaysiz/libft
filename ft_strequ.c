@@ -6,7 +6,7 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 10:19:15 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/06/08 17:45:51 by ksiziva          ###   ########.fr       */
+/*   Updated: 2018/06/17 07:00:28 by kaysiz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 int	ft_strequ(char const *s1, char const *s2)
 {
-	if (s1 != s2)
+	if (s1 && s2 && ft_strcmp(s1, s2))
 		return (0);
-	if (!ft_strcmp(s1, s2))
-		return (1);
-	return (0);
+	return (1);
 }

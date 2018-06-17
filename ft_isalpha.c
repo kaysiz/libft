@@ -6,7 +6,7 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 08:29:09 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/05/31 10:32:07 by ksiziva          ###   ########.fr       */
+/*   Updated: 2018/06/17 06:29:55 by kaysiz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,5 @@
 
 int	ft_isalpha(int c)
 {
-	if (ft_isupper(c) > 0 || ft_islower(c) > 0)
-		return (c);
-	else
-		return (0);
+	return (ft_isupper(c) || ft_islower(c));
 }

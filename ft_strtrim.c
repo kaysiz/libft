@@ -6,7 +6,7 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 09:42:43 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/06/15 16:31:48 by ksiziva          ###   ########.fr       */
+/*   Updated: 2018/06/17 06:18:16 by kaysiz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,25 @@ char				*ft_strtrim(char const *s)
 	i = 0;
 	j = 0;
 	k = 0;
-	while (ft_isspace2(s[i]))
-		i++;
-	if (s[i] == '\0')
-		return (ft_strcpy(ft_memalloc(sizeof(char *) * 2), ""));
-	j = ft_strlen(s) - 1;
-	while (ft_isspace2(s[j]))
-		j--;
-	res = (char *)malloc(sizeof(char) * (j - i + 2));
-	if (res == NULL)
-		return (NULL);
-	while (k < j - i + 1)
-	{
-		res[k] = s[i + k];
-		k++;
-	}
-	res[k] = '\0';
-	return (res);
+    if (s != NULL)
+    {
+	    while (ft_isspace2(s[i]))
+		    i++;
+	    if (s[i] == '\0')
+		    return (ft_strcpy(ft_memalloc(sizeof(char *) * 2), ""));
+	    j = ft_strlen(s) - 1;
+   	    while (ft_isspace2(s[j]))
+		    j--;
+	    res = (char *)malloc(sizeof(char) * (j - i + 2));
+	    if (res == NULL)
+		    return (NULL);
+	    while (k < j - i + 1)
+	    {
+		    res[k] = s[i + k];
+		    k++;
+	    }
+	    res[k] = '\0';
+	    return (res);
+    }
+    return (NULL);
 }

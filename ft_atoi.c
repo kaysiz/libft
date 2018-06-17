@@ -6,17 +6,24 @@
 /*   By: ksiziva <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 10:39:15 by ksiziva           #+#    #+#             */
-/*   Updated: 2018/06/07 12:43:15 by ksiziva          ###   ########.fr       */
+/*   Updated: 2018/06/17 05:51:01 by kaysiz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+static int  ft_atoicheck(int sign)
+{
+    if (sign == -1)
+        return (0);
+    return (-1);
+}
+
 int	ft_atoi(const char *str)
 {
 	int	result;
-	unsigned int	i;
-	long	sign;
+	int i;
+	int sign;
 	
 	result = 0;
     i = 0;
@@ -36,10 +43,7 @@ int	ft_atoi(const char *str)
 	}
 	if (i >= 20)
 	{
-		if (sign == -1)
-			return (0);
-		else if (sign == 1)
-			return (-1);
+        return (ft_atoicheck(sign));
 	}
 	return (result * sign);
 }
